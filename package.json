@@ -5,7 +5,7 @@
   "description": "Classical data structures implemented in JavaScript",
   "main": "index.js",
   "scripts": {
-    "test": "mocha \"./src/*/**/*.js\""
+    "test": "mocha"
   },
   "keywords": [],
   "author": "",
