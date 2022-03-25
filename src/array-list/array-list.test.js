@@ -25,7 +25,7 @@ describe('ArrayList', () => {
         });
     });
 
-    describe('get method', () => {
+    describe('get', () => {
         it('returns a value at the index', () => {
             const list = new ArrayList([1, 2, 3]);
 
@@ -45,7 +45,7 @@ describe('ArrayList', () => {
         });
     });
 
-    describe('set method', () => {
+    describe('set', () => {
         it('sets a value at the specific index', () => {
             const list = new ArrayList(4);
 
@@ -69,30 +69,30 @@ describe('ArrayList', () => {
         });
     });
 
-    describe('insert method', () => {
-        it('inserts a value into the list', () => {
+    describe('add', () => {
+        it('adds a value into the list', () => {
             const list = new ArrayList();
 
-            list.insert(1);
+            list.add(1);
 
             expect(list.size).toBe(1);
             expect(list.get(0)).toBe(1);
         });
 
-        it('inserts a value into the list at the specified index', () => {
+        it('adds a value into the list at the specified index', () => {
             const list = new ArrayList();
 
-            list.insert(1);
-            list.insert(3);
-            list.insert(4);
-            list.insert(2, 1);
+            list.add(1);
+            list.add(3);
+            list.add(4);
+            list.add(2, 1);
 
             expect(list.size).toBe(4);
             expect(list.get(1)).toBe(2);
         });
     });
 
-    describe('remove method', () => {
+    describe('remove', () => {
         it('removes a value from the list at the specified index', () => {
             const list = new ArrayList([1, 2, 3, 4]);
 
@@ -102,7 +102,7 @@ describe('ArrayList', () => {
         });
     });
 
-    describe('indexOf method', () => {
+    describe('indexOf', () => {
         it('returns the index of the value if it is present', () => {
             const list = new ArrayList([1, 2, 3, 4]);
 
@@ -120,7 +120,7 @@ describe('ArrayList', () => {
         });
     });
 
-    describe('has method', () => {
+    describe('has', () => {
         it('returns `true` if the value is present', () => {
             const list = new ArrayList([1, 2, 3, 4]);
 
@@ -134,7 +134,7 @@ describe('ArrayList', () => {
         });
     });
 
-    describe('toString method', () => {
+    describe('toString', () => {
         it('returns a string representation of the list', () => {
             const list = new ArrayList([1, 2, 3, 4]);
 

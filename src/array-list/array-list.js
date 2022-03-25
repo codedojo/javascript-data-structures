@@ -43,7 +43,7 @@ export default class ArrayList {
         this.#items[index] = value;
     }
 
-    insert(value, index = this.#size) {
+    add(value, index = this.#size) {
         if (index < 0 || index > this.#size) {
             throw new Error('The index is out of range');
         }
@@ -100,14 +100,23 @@ export default class ArrayList {
         return this.indexOf(value) > -1;
     }
 
-    toString() {
+    clear() {
+        this.#items = [];
+        this.#size = 0;
+    }
+
+    toString(separator = ',') {
         let result = '';
 
         for (let i = 0; i < this.#size; i++) {
-            result += this.#items[i];
+            const value = this.#items[i];
+
+            if (value) {
+                result += value;
+            }
 
             if (i < this.#size - 1) {
-                result += ',';
+                result += separator;
             }
         }
 
@@ -116,7 +125,7 @@ export default class ArrayList {
 
     *[Symbol.iterator]() {
         for (let i = 0; i < this.#size; i++) {
-            yield this[i];
+            yield this.#items[i];
         }
     }
 }
