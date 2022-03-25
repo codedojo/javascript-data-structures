@@ -12,7 +12,7 @@ describe('Stack', () => {
     });
 
     describe('push', () => {
-        it('pushes a value onto the stack', () => {
+        it('adds a value to the stack', () => {
             const stack = new Stack();
 
             stack.push(1);
@@ -22,7 +22,18 @@ describe('Stack', () => {
     });
 
     describe('pop', () => {
-        it('pops a value from the stack', () => {
+        it('removes the last value from the stack', () => {
+            const stack = new Stack();
+
+            stack.push(1);
+            stack.push(2);
+            stack.push(3);
+            stack.pop();
+
+            expect(stack.size).toBe(2);
+        });
+
+        it('returns the removed value', () => {
             const stack = new Stack();
 
             stack.push(1);
@@ -30,7 +41,6 @@ describe('Stack', () => {
             stack.push(3);
             const value = stack.pop();
 
-            expect(stack.size).toBe(2);
             expect(value).toBe(3);
         });
 
@@ -43,7 +53,7 @@ describe('Stack', () => {
     });
 
     describe('peek', () => {
-        it('returns the top value of the stack', () => {
+        it('returns the next value in the stack', () => {
             const stack = new Stack();
 
             stack.push(1);
@@ -64,7 +74,7 @@ describe('Stack', () => {
 
     describe('toString', () => {
         it('returns a string representation of the stack', () => {
-            const stack = new Stack(1, 2, 3);
+            const stack = new Stack();
 
             stack.push(1);
             stack.push(2);
