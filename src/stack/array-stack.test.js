@@ -42,6 +42,7 @@ describe('ArrayStack', () => {
             stack.push(1);
             stack.push(2);
             stack.push(3);
+
             const value = stack.peek();
 
             expect(stack.size).toBe(3);

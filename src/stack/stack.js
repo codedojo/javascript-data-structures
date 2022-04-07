@@ -42,6 +42,6 @@ export default class Stack {
     }
 
     *[Symbol.iterator]() {
-        yield this.#items[Symbol.iterator]();
+        yield this.#items.iterator(-1);
     }
 }

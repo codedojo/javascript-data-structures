@@ -43,6 +43,8 @@ export default class Stack {
     }
 
     *[Symbol.iterator]() {
-        yield this.#items[Symbol.iterator]();
+        for (let i = this.#size - 1; i >= 0; i--) {
+            yield this.#items[i];
+        }
     }
 }
