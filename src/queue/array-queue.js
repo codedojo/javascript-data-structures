@@ -1,4 +1,4 @@
-export default class ArrayQueue {
+export default class Queue {
     #items = [];
     #head = 0;
     #tail = -1;
@@ -22,7 +22,7 @@ export default class ArrayQueue {
 
     enqueue(value) {
         if (this.#items.length === this.#size) {
-            const newLength = (this.#size === 0) ? 4 : this.#size * 2;
+            const newLength = this.empty ? 4 : this.#size * 2;
             const newArray = new Array(newLength);
 
             if (this.#size > 0) {
@@ -73,7 +73,7 @@ export default class ArrayQueue {
     }
 
     dequeue() {
-        if (this.#size === 0) return;
+        if (this.empty) return;
 
         const value = this.#items[this.#head];
 
@@ -100,8 +100,20 @@ export default class ArrayQueue {
         this.#size = 0;
     }
 
+    toString(separator = ',') {
+        let string = '';
+
+        if (this.empty) return string;
+
+        for (const value of this) {
+            string += value.toString() + separator;
+        }
+
+        return string.slice(0, string.length - separator.length);
+    }
+
     *[Symbol.iterator]() {
-        if (this.#size === 0) return;
+        if (this.empty) return;
 
         // if the queue wraps then handle that case
         if (this.#tail < this.#head) {
