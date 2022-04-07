@@ -14,6 +14,14 @@ class QueueItem {
 export default class PriorityQueue {
     #items = new DoublyLinkedList();
 
+    constructor(compare) {
+        if (typeof compare !== 'function') {
+            throw new Error('No compare function provided');
+        }
+
+        this.compare = compare;
+    }
+
     get size() {
         return this.#items.size;
     }
@@ -41,7 +49,7 @@ export default class PriorityQueue {
         let added = false;
 
         for (const item of this.#items) {
-            if (newItem.priority > item.priority) {
+            if (this.compare(newItem.priority, item.priority) === 1) {
                 this.#items.addBefore(item, newItem);
                 added = true;
                 break;
