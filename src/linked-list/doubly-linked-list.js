@@ -73,12 +73,12 @@ export default class DoublyLinkedList {
         }
 
         const newNode = new Node(newValue);
-        const prevNode = currentNode.prev;
+        const prevNode = targetNode.prev;
 
         prevNode.next = newNode;
         newNode.prev = prevNode;
-        newNode.next = currentNode;
-        currentNode.prev = newNode;
+        newNode.next = targetNode;
+        targetNode.prev = newNode;
 
         this.#size += 1;
     }
@@ -200,12 +200,25 @@ export default class DoublyLinkedList {
         }
     }
 
-    *[Symbol.iterator]() {
-        let current = this.#head;
+    *iterator(dir = 1) {
+        if (dir === 1) {
+            let current = this.#head;
 
-        while (current !== null) {
-            yield current.value;
-            current = current.next;
+            while (current !== null) {
+                yield current.value;
+                current = current.next;
+            }
+        } else {
+            let current = this.#tail;
+
+            while (current !== null) {
+                yield current.value;
+                current = current.prev;
+            }
         }
+    }
+
+    *[Symbol.iterator]() {
+        yield this.iterator(1);
     }
 }
