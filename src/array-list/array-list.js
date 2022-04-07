@@ -1,22 +1,24 @@
 export default class ArrayList {
     #items = [];
+    #capacity = 0;
     #size = 0;
 
     constructor(arg) {
         if (typeof arg === 'number') {
             this.#items = new Array(arg);
-            this.#size = arg;
+            this.#capacity = arg;
+            this.#size = 0;
         } else if (Array.isArray(arg)) {
             for (let i = 0; i < arg.length; i++) {
                 this.#items[i] = arg[i];
+                this.#capacity += 1;
+                this.#size += 1;
             }
-
-            this.#size = arg.length;
         }
     }
 
     get capacity() {
-        return this.#items.length;
+        return this.#capacity;
     }
 
     get size() {
@@ -36,29 +38,34 @@ export default class ArrayList {
     }
 
     set(index, value) {
-        if (index < 0 || index >= this.#size) {
+        if (index < 0 || index >= this.#capacity) {
             throw new Error('The index is out of range');
         }
 
         this.#items[index] = value;
     }
 
-    add(value, index = this.#size) {
-        if (index < 0 || index > this.#size) {
+    add(value) {
+        return this.addAt(this.#size, value);
+    }
+
+    addAt(index, value) {
+        if (index < 0 || index > this.#capacity) {
             throw new Error('The index is out of range');
         }
 
-        if (this.#size === this.#items.length) {
-            const newLength = (this.#size === 0) ? 4 : this.#size * 2;
-            const newArray = new Array(newLength);
+        if (this.#size === this.#capacity) {
+            const capacity = this.#size === 0 ? 4 : this.#size * 2;
+            const items = new Array(capacity);
 
             if (this.#size > 0) {
                 for (let i = 0; i < this.#items.length; i++) {
-                    newArray[i] = this.#items[i];
+                    items[i] = this.#items[i];
                 }
             }
 
-            this.#items = newArray;
+            this.#items = items;
+            this.#capacity = capacity;
         }
 
         for (let i = this.#size; i > index; i--) {
@@ -70,8 +77,16 @@ export default class ArrayList {
         this.#size += 1;
     }
 
-    remove(index) {
-        if (index < 0 || index >= this.#size) {
+    remove(value) {
+        const index = this.indexOf(value);
+
+        if (index === -1) return;
+
+        return this.removeAt(index);
+    }
+
+    removeAt(index) {
+        if (index < 0 || index >= this.#capacity) {
             throw new Error('The index is out of range');
         }
 
@@ -102,23 +117,24 @@ export default class ArrayList {
 
     clear() {
         this.#items = [];
+        this.#capacity = 0;
         this.#size = 0;
     }
 
     toString(separator = ',') {
-        let result = '';
+        let result = '[';
 
         for (let i = 0; i < this.#size; i++) {
             const value = this.#items[i];
 
-            if (value) {
-                result += value;
-            }
+            result += value || '<empty>';
 
             if (i < this.#size - 1) {
                 result += separator;
             }
         }
+
+        result += ']';
 
         return result;
     }

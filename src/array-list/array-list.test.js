@@ -10,36 +10,43 @@ describe('ArrayList', () => {
             expect(list).toBeAn(ArrayList);
         });
 
-        it('creates a list with an initial length', () => {
+        it('creates a list with a default capacity and size', () => {
+            const list = new ArrayList();
+
+            expect(list.capacity).toBe(0);
+            expect(list.size).toBe(0);
+        });
+
+        it('creates a list with a given capacity', () => {
             const list = new ArrayList(4);
 
             expect(list.capacity).toBe(4);
-            expect(list.size).toBe(4);
+            expect(list.size).toBe(0);
         });
 
-        it('creates a list with initial values', () => {
-            const list = new ArrayList([1, 2, 3]);
+        it('creates a list with given values', () => {
+            const list = new ArrayList([1, 2, 3, 4]);
 
-            expect(list.capacity).toBe(3);
-            expect(list.size).toBe(3);
+            expect(list.capacity).toBe(4);
+            expect(list.size).toBe(4);
         });
     });
 
     describe('get', () => {
         it('returns a value at the index', () => {
-            const list = new ArrayList([1, 2, 3]);
+            const list = new ArrayList([1, 2, 3, 4]);
 
             expect(list.get(1)).toBe(2);
         });
 
         it('given a negative index, returns a value at the index from the end of the list', () => {
-            const list = new ArrayList([1, 2, 3]);
+            const list = new ArrayList([1, 2, 3, 4]);
 
-            expect(list.get(-1)).toBe(3);
+            expect(list.get(-1)).toBe(4);
         });
 
         it('returns `undefined` if the index is out of range', () => {
-            const list = new ArrayList([1, 2, 3]);
+            const list = new ArrayList();
 
             expect(list.get(42)).toBe(undefined);
         });
@@ -78,14 +85,16 @@ describe('ArrayList', () => {
             expect(list.size).toBe(1);
             expect(list.get(0)).toBe(1);
         });
+    });
 
+    describe('addAt', () => {
         it('adds a value into the list at the specified index', () => {
-            const list = new ArrayList();
+            const list = new ArrayList(4);
 
-            list.add(1);
-            list.add(3);
-            list.add(4);
-            list.add(2, 1);
+            list.addAt(1);
+            list.addAt(3);
+            list.addAt(4);
+            list.addAt(1, 2);
 
             expect(list.size).toBe(4);
             expect(list.get(1)).toBe(2);
@@ -93,12 +102,23 @@ describe('ArrayList', () => {
     });
 
     describe('remove', () => {
-        it('removes a value from the list at the specified index', () => {
+        it('removes a value from the list', () => {
             const list = new ArrayList([1, 2, 3, 4]);
 
             list.remove(1);
 
             expect(list.size).toBe(3);
+        });
+    });
+
+    describe('removeAt', () => {
+        it('removes a value from the list at the specified index', () => {
+            const list = new ArrayList([1, 2, 3, 4]);
+
+            list.removeAt(0);
+
+            expect(list.size).toBe(3);
+            expect(list.get(0)).toBe(2);
         });
     });
 
@@ -134,11 +154,22 @@ describe('ArrayList', () => {
         });
     });
 
+    describe('clear', () => {
+        it('returns the list to the initial state', () => {
+            const list = new ArrayList([1, 2, 3, 4]);
+
+            list.clear();
+
+            expect(list.capacity).toBe(0);
+            expect(list.size).toBe(0);
+        });
+    });
+
     describe('toString', () => {
         it('returns a string representation of the list', () => {
             const list = new ArrayList([1, 2, 3, 4]);
 
-            expect(list.toString()).toBe('1,2,3,4');
+            expect(list.toString()).toBe('[1,2,3,4]');
         });
     });
 });
