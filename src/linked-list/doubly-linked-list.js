@@ -11,12 +11,6 @@ export default class DoublyLinkedList {
     #tail = null;
     #size = 0;
 
-    constructor(...args) {
-        for (const value of args) {
-            this.addLast(value);
-        }
-    }
-
     get size() {
         return this.#size;
     }
@@ -31,6 +25,12 @@ export default class DoublyLinkedList {
 
     get last() {
         return this.#tail?.value;
+    }
+
+    constructor(items = []) {
+        for (const item of items) {
+            this.addLast(item);
+        }
     }
 
     addFirst(value) {
@@ -103,6 +103,16 @@ export default class DoublyLinkedList {
         this.#size += 1;
     }
 
+    add(...values) {
+        for (const value of values) {
+            this.addLast(value);
+        }
+    }
+
+    has(value) {
+        return Boolean(this.#findNode(value));
+    }
+
     removeFirst() {
         if (this.#head === null) return;
 
@@ -161,10 +171,6 @@ export default class DoublyLinkedList {
         return true;
     }
 
-    has(value) {
-        return Boolean(this.#findNode(value));
-    }
-
     clear() {
         this.#head = null;
         this.#tail = null;
@@ -219,6 +225,6 @@ export default class DoublyLinkedList {
     }
 
     *[Symbol.iterator]() {
-        yield this.iterator(1);
+        yield* this.iterator(1);
     }
 }

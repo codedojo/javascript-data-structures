@@ -10,12 +10,6 @@ export default class LinkedList {
     #tail = null;
     #size = 0;
 
-    constructor(...args) {
-        for (const value of args) {
-            this.addLast(value);
-        }
-    }
-
     get size() {
         return this.#size;
     }
@@ -30,6 +24,12 @@ export default class LinkedList {
 
     get last() {
         return this.#tail?.value;
+    }
+
+    constructor(items = []) {
+        for (const item of items) {
+            this.addLast(item);
+        }
     }
 
     addFirst(value) {
@@ -96,6 +96,16 @@ export default class LinkedList {
         this.#size += 1;
     }
 
+    add(...values) {
+        for (const value of values) {
+            this.addLast(value);
+        }
+    }
+
+    has(value) {
+        return Boolean(this.#findNode(value));
+    }
+
     removeFirst() {
         if (this.#head === null) return;
 
@@ -147,10 +157,6 @@ export default class LinkedList {
         currNode.next = null;
 
         this.#size -= 1;
-    }
-
-    has(value) {
-        return Boolean(this.#findNode(value));
     }
 
     clear() {
