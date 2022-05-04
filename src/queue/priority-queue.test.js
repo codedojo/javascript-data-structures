@@ -12,14 +12,23 @@ describe('PriorityQueue', () => {
     });
 
     describe('enqueue', () => {
+        it('adds a value to the queue', () => {
+            const queue = new PriorityQueue();
+
+            queue.enqueue(1);
+            queue.enqueue(2);
+            queue.enqueue(3);
+
+            expect(queue.size).toBe(3);
+            expect(queue.first).toBe(1);
+        });
+
         it('adds a value to the queue according to the priority', () => {
             const queue = new PriorityQueue();
 
             queue.enqueue(1);
             queue.enqueue(2, 1);
             queue.enqueue(3, 2);
-
-            console.log(queue.toString());
 
             expect(queue.first).toBe(3);
         });
@@ -32,6 +41,7 @@ describe('PriorityQueue', () => {
             queue.enqueue(1);
             queue.enqueue(2, 1);
             queue.enqueue(3, 2);
+
             queue.dequeue();
 
             expect(queue.size).toBe(2);

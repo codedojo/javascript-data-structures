@@ -1,5 +1,11 @@
 import DoublyLinkedList from '../linked-list/doubly-linked-list.js';
 
+function defaultCompare(a, b) {
+    if (a > b) return 1;
+    if (a < b) return -1;
+    return 0;
+}
+
 class QueueItem {
     constructor(value, priority = 0) {
         this.value = value;
@@ -14,7 +20,7 @@ class QueueItem {
 export default class PriorityQueue {
     #items = new DoublyLinkedList();
 
-    constructor(compare) {
+    constructor(compare = defaultCompare) {
         if (typeof compare !== 'function') {
             throw new Error('No compare function provided');
         }
@@ -84,6 +90,6 @@ export default class PriorityQueue {
     }
 
     *[Symbol.iterator]() {
-        yield this.#items[Symbol.iterator]();
+        yield* this.#items[Symbol.iterator]();
     }
 }

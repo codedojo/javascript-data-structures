@@ -46,6 +46,6 @@ export default class Queue {
     }
 
     *[Symbol.iterator]() {
-        yield this.#items[Symbol.iterator]();
+        yield* this.#items[Symbol.iterator]();
     }
 }
