@@ -10,25 +10,10 @@ describe('ArrayList', () => {
             expect(list).toBeAn(ArrayList);
         });
 
-        it('creates a list with a default capacity and size', () => {
-            const list = new ArrayList();
+        it('creates a list with initial values passed as an array', () => {
+            const list = new ArrayList([1, 2, 3]);
 
-            expect(list.capacity).toBe(0);
-            expect(list.size).toBe(0);
-        });
-
-        it('creates a list with a given capacity', () => {
-            const list = new ArrayList(4);
-
-            expect(list.capacity).toBe(4);
-            expect(list.size).toBe(0);
-        });
-
-        it('creates a list with given values', () => {
-            const list = new ArrayList([1, 2, 3, 4]);
-
-            expect(list.capacity).toBe(4);
-            expect(list.size).toBe(4);
+            expect(list.size).toBe(3);
         });
     });
 
@@ -160,7 +145,6 @@ describe('ArrayList', () => {
 
             list.clear();
 
-            expect(list.capacity).toBe(0);
             expect(list.size).toBe(0);
         });
     });
