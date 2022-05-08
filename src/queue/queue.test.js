@@ -1,10 +1,10 @@
 import expect from 'expect';
 
-import QueueArray from './queue.dll.js';
-import QueueDLL from './queue.dll.js';
+import ArrayQueue from './queue.dll.js';
+import DLLQueue from './queue.dll.js';
 
-test('Queue implemented as an array', QueueArray);
-test('Queue implemented as a doubly linked list', QueueDLL);
+test('Queue implemented as an array', ArrayQueue);
+test('Queue implemented as a doubly linked list', DLLQueue);
 
 function test(description, Queue) {
     describe(description, () => {

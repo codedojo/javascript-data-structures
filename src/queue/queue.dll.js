@@ -1,4 +1,4 @@
-import DoublyLinkedList from '../linked-list/doubly-linked-list.js';
+import { DoublyLinkedList } from '../linked-list';
 
 export default class Queue {
     #items = new DoublyLinkedList();

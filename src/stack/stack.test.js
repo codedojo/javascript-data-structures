@@ -1,10 +1,10 @@
 import expect from 'expect';
 
-import StackArray from './stack.array.js';
-import StackDLL from './stack.dll.js';
+import ArrayStack from './stack.array.js';
+import DLLStack from './stack.dll.js';
 
-test('Stack implemented as an array', StackArray);
-test('Stack implemented as a doubly linked list', StackDLL);
+test('Stack implemented as an array', ArrayStack);
+test('Stack implemented as a doubly linked list', DLLStack);
 
 function test(description, Stack) {
     describe(description, () => {

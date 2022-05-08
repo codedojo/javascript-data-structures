@@ -1,4 +1,4 @@
-import LinkedList from '../linked-list/linked-list.js';
+import LinkedList from '../linked-list';
 
 export default class Set {
     #values = new LinkedList();
