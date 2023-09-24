@@ -1,4 +1,4 @@
-import { DoublyLinkedList } from '../linked-list';
+import { DoublyLinkedList } from '../linked-list/index.js';
 
 export default class Stack {
     #items = new DoublyLinkedList();

@@ -14,15 +14,15 @@ class HashTableItem {
 
     get(key) {
         for (const item of this.#items) {
-            if (item.key === key) {
-                return item.value;
+            if (item[0] === key) {
+                return item[1];
             }
         }
     }
 
     has(key) {
         for (const item of this.#items) {
-            if (item.key === key) {
+            if (item[0] === key) {
                 return true;
             }
         }
@@ -31,13 +31,13 @@ class HashTableItem {
     }
 
     add(key, value) {
-        this.#items.addFirst({ key, value });
+        this.#items.addFirst([key, value]);
     }
 
     update(key, value) {
         for (const item of this.#items) {
-            if (item.key === key) {
-                item.value = value;
+            if (item[0] === key) {
+                item[1] = value;
                 return true;
             }
         }
@@ -47,7 +47,7 @@ class HashTableItem {
 
     remove(key) {
         for (const item of this.#items) {
-            if (item.key === key) {
+            if (item[0] === key) {
                 this.#items.remove(item);
                 return true;
             }
